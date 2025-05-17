@@ -1,7 +1,23 @@
 use 5.38.0;
 
 # Get file content
-my $tex = do {local $/ = undef; <>};
+my @file_list;
+
+if (!defined($ARGV[0])) {
+    @file_list = glob "*.tex";
+} else {
+    @file_list = grep {m/\.tex$/} @ARGV;
+}
+
+my $tex = do {
+    my $content = '';
+    for my $file (@file_list) {
+        open(my $fh, '<', $file) or die "Could not open '$file': $!";
+        $content .= do { local $/; <$fh> };
+        close($fh);
+    }
+    $content;
+};
 
 # The content of the cmd is no need
 my @content_del_cmd = qw/
@@ -49,4 +65,4 @@ $tex =~ s/[^\S\n]/ /g;
 my @words = split(/\s+/, $tex);
 my $word_count = scalar @words;
 print "Word count: $word_count\n";
-print "Clean text:\n$tex\n\n";
+# print "Clean text:\n$tex\n\n";
