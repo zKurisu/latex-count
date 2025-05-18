@@ -39,7 +39,7 @@ my $env_del_cmd_str = join "|", @env_del_cmd;
 my $env_del_cmd_reg = qr/(?:$env_del_cmd_str)/;
 
 # Delete comments
-$tex =~ s/(?<!\\)%.*?$//gm;
+$tex =~ s/\s*(?<!\\)%.*?$//gm;
 
 # Delete env like:
 # \begin{table}[h!]
@@ -48,7 +48,7 @@ $tex =~ s/(?<!\\)%.*?$//gm;
 $tex =~ s/\\begin\{($env_del_cmd_reg\*?)\}.*?\\end\{\1\}//sg;
 
 # Delete command like: \documentclass{article}, \maketitle, the content is not related to body
-$tex =~ s/\\$content_del_cmd_reg(?:\*)?(?:\[.*?\])?(?:\{.*?$)?//smg; 
+$tex =~ s/\\$content_del_cmd_reg(?:\*)?(?:\[.*?\])?\s*(?:\{.*?\}\s*)*\s+//sg; 
 
 # Delete command like: \title{xxx}, \author{xxx} the content is part of body
 $tex =~ s/\\\w+\*?\{(.*?)\}/$1/g; 
@@ -65,4 +65,3 @@ $tex =~ s/[^\S\n]/ /g;
 my @words = split(/\s+/, $tex);
 my $word_count = scalar @words;
 print "Word count: $word_count\n";
-# print "Clean text:\n$tex\n\n";
