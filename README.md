@@ -1,7 +1,8 @@
 # Introduction
-Calculate the body word count (general, not very accurate) in latex file (English) using perl code.
+Calculate the body word count (general, not very accurate) in latex/typst file (English) using perl code.
 
 # Usage
+## LaTeX Example
 For all `.tex` file under the current directory:
 ```sh
 $ tree
@@ -23,3 +24,4 @@ $ perl latex_count.pl 1_introduction.tex 2_theory.tex
 Word count: 2778
 ```
 
+## Typst Example
