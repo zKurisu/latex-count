@@ -158,6 +158,8 @@ $typ =~ s/^\s*$//mg;
 
 $typ =~ s/[^\S\n]/ /;
 
-print $typ;
+my @words = split(/\s+/, $typ);
+my $word_count = scalar @words;
+print "Word count: $word_count\n";
 
 __END__

@@ -25,3 +25,22 @@ Word count: 2778
 ```
 
 ## Typst Example
+The same with latex one.
+
+For all `.typ` file under the current directory:
+```sh
+$ tree
+.
+├── body.typ
+├── introduction.typ
+├── main.typ
+└── typst_count.pl
+$ perl typst_count.pl
+Word count: 2123
+```
+
+For single file or multi specific files:
+```sh
+$ perl typst_count.pl body.typ main.typ
+Word count: 2106
+```
